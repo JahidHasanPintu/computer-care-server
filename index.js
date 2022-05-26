@@ -30,17 +30,19 @@ function verifyJwt(req, res, next) {
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.nkdwi.mongodb.net/?retryWrites=true&w=majority`;
 
+
+
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 async function run() {
     try {
         await client.connect();
-        const partsCollection = client.db('bicycles_manufacturer').collection('parts');
-        const orderCollection = client.db('bicycles_manufacturer').collection('orders');
-        const reviewCollection = client.db('bicycles_manufacturer').collection('reviews');
-        const profileCollection = client.db('bicycles_manufacturer').collection('profile');
-        const userCollection = client.db('bicycles_manufacturer').collection('user');
-        const paymentCollection = client.db('bicycles_manufacturer').collection('payments');
+        const partsCollection = client.db('computer_care').collection('parts');
+        const orderCollection = client.db('computer_care').collection('orders');
+        const reviewCollection = client.db('computer_care').collection('reviews');
+        const profileCollection = client.db('computer_care').collection('profile');
+        const userCollection = client.db('computer_care').collection('user');
+        const paymentCollection = client.db('computer_care').collection('payments');
 
         app.get('/part', async (req, res) => {
             const query = {}
@@ -202,37 +204,37 @@ async function run() {
             res.send(result)
         })
 
-         //stripe backend api:
-         app.post('/create-payment-intent', verifyJwt, async (req, res) => {
-            const part = req.body
-            const price = part.pricePerUnit * part.orderQuantity
-            console.log(price);
-            const amount = price * 100
+        //  //stripe backend api:
+        //  app.post('/create-payment-intent', verifyJwt, async (req, res) => {
+        //     const part = req.body
+        //     const price = part.pricePerUnit * part.orderQuantity
+        //     console.log(price);
+        //     const amount = price * 100
 
-            const paymentIntent = await stripe.paymentIntents.create({
-                amount: amount,
-                currency: "usd",
-                payment_method_types: ["card"],
-            });
-            res.send({
-                clientSecret: paymentIntent.client_secret,
-            });
-        })
-        //transiction id store in database api:
-        app.patch('/order/:id', verifyJwt, async (req, res) => {
-            const id = req.params.id
-            const payment = req.body
-            const filter = { _id: ObjectId(id) }
-            const updatedoc = {
-                $set: {
-                    paid: true,
-                    transictionId: payment.transictionId
-                }
-            }
-            const result = await paymentCollection.insertOne(payment)
-            const updateOrder = await orderCollection.updateOne(filter, updatedoc)
-            res.send(updateOrder)
-        })
+        //     const paymentIntent = await stripe.paymentIntents.create({
+        //         amount: amount,
+        //         currency: "usd",
+        //         payment_method_types: ["card"],
+        //     });
+        //     res.send({
+        //         clientSecret: paymentIntent.client_secret,
+        //     });
+        // })
+        // //transiction id store in database api:
+        // app.patch('/order/:id', verifyJwt, async (req, res) => {
+        //     const id = req.params.id
+        //     const payment = req.body
+        //     const filter = { _id: ObjectId(id) }
+        //     const updatedoc = {
+        //         $set: {
+        //             paid: true,
+        //             transictionId: payment.transictionId
+        //         }
+        //     }
+        //     const result = await paymentCollection.insertOne(payment)
+        //     const updateOrder = await orderCollection.updateOne(filter, updatedoc)
+        //     res.send(updateOrder)
+        // })
         
     }
     finally {
