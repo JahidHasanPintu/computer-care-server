@@ -218,3 +218,18 @@ async function run() {
                 clientSecret: paymentIntent.client_secret,
             });
         })
+        //transiction id store in database api:
+        app.patch('/order/:id', verifyJwt, async (req, res) => {
+            const id = req.params.id
+            const payment = req.body
+            const filter = { _id: ObjectId(id) }
+            const updatedoc = {
+                $set: {
+                    paid: true,
+                    transictionId: payment.transictionId
+                }
+            }
+            const result = await paymentCollection.insertOne(payment)
+            const updateOrder = await orderCollection.updateOne(filter, updatedoc)
+            res.send(updateOrder)
+        })
