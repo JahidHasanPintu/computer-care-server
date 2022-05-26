@@ -233,3 +233,21 @@ async function run() {
             const updateOrder = await orderCollection.updateOne(filter, updatedoc)
             res.send(updateOrder)
         })
+        
+    }
+    finally {
+
+    }
+
+}
+run().catch(console.dir);
+
+
+
+app.get('/', (req, res) => {
+    res.send('Computer care server running')
+})
+
+app.listen(port, () => {
+    console.log(`computer server  app listening on port ${port}`)
+})
