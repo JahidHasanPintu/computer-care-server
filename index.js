@@ -137,3 +137,27 @@ async function run() {
 
 
         })
+
+                //user load api:
+                app.get('/user', verifyJwt, async (req, res) => {
+
+                    const query = {}
+                    const cursor = userCollection.find(query)
+                    const users = await cursor.toArray()
+                    res.send(users)
+                })
+        
+        
+                app.put('/user/:email', async (req, res) => {
+                    const email = req.params.email
+                    const user = req.body
+                    const filter = { email: email }//email diye amra user take khujbo
+                    const options = { upsert: true }
+                    const updatedoc = {
+                        //set er moddhe user related info thakbe.ei info amra body theke nibo
+                        $set: user,
+                    };
+                    const result = await userCollection.updateOne(filter, updatedoc, options)
+                    var token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+                    res.send({ result, token })
+                })
