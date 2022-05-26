@@ -121,3 +121,19 @@ async function run() {
             const result = await profileCollection.insertOne(newProfile)
             res.send(result)
         })
+
+         //update api for myProfile
+         app.put('/myprofile/:email', async (req, res) => {
+            const email = req.params.email
+            const info = req.body
+            const filter = { email: email }
+            const options = { upsert: true }
+            const updatedoc = {
+                //set er moddhe user related info thakbe.ei info amra body theke nibo
+                $set: info,
+            };
+            const result = await profileCollection.updateOne(filter, updatedoc, options)
+            res.send(result)
+
+
+        })
