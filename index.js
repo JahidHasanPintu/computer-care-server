@@ -201,3 +201,20 @@ async function run() {
             const result = await partsCollection.deleteOne(query)
             res.send(result)
         })
+
+         //stripe backend api:
+         app.post('/create-payment-intent', verifyJwt, async (req, res) => {
+            const part = req.body
+            const price = part.pricePerUnit * part.orderQuantity
+            console.log(price);
+            const amount = price * 100
+
+            const paymentIntent = await stripe.paymentIntents.create({
+                amount: amount,
+                currency: "usd",
+                payment_method_types: ["card"],
+            });
+            res.send({
+                clientSecret: paymentIntent.client_secret,
+            });
+        })
