@@ -107,3 +107,17 @@ async function run() {
             const result = await reviewCollection.insertOne(newReview)
             res.send(result)
         })
+
+         //review  data load api:
+         app.get('/review', async (req, res) => {
+            const query = {}
+            const cursor = reviewCollection.find(query)
+            const reviews = await cursor.toArray()
+            res.send(reviews)
+        })
+        //profile post backend  api:
+        app.post('/myprofile', async (req, res) => {
+            const newProfile = req.body
+            const result = await profileCollection.insertOne(newProfile)
+            res.send(result)
+        })
