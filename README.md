@@ -1,6 +1,18 @@
-# Todo App
+# ComputerCare - Manufacturer website -server
 
-Simple Todo app CRUD application [Live site link: ](https://todo-app-be858.web.app/).
+ComputerCare - Manufacturer website is a simple website of a computer parts Manufacturer From where customers can buy and see every computer parts.
+Live Client site Link: https://computer-care-manufacturer.web.app/home
 
-Server Site live link: https://todo-app-for-special-grp.herokuapp.com/tasks
-Client site github link: https://github.com/JahidHasanPintu/TodoAppClient
+Client Side Github link: https://github.com/programming-hero-web-course1/manufacturer-website-client-side-JahidHasanPintu
+
+## To complete this server i used
+
+- Node
+- Mongo DB
+- Express
+- Heroku deploy
+- Cors
+- Stripe
+- Express
+- dot env
+- JWT
