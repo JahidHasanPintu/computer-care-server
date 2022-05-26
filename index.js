@@ -161,3 +161,23 @@ async function run() {
                     var token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
                     res.send({ result, token })
                 })
+
+                
+        //make admin backend api:
+        app.put('/user/admin/:email', verifyJwt, async (req, res) => {
+            const email = req.params.email
+            const requester = req.decoded.email
+            const requesterAccount = await userCollection.findOne({ email: requester })
+            if (requesterAccount.role === 'admin') {
+                const filter = { email: email }
+                const updatedoc = {
+                    //set er moddhe user related info thakbe.ei info amra body theke nibo
+                    $set: { role: 'admin' },
+                };
+                const result = await userCollection.updateOne(filter, updatedoc)
+                res.send(result)
+            }
+            else {
+                res.status(403).send({ message: 'forbidden access' })
+            }
+        })
