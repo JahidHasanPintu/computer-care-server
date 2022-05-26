@@ -1,37 +1,6 @@
-# Cute Car- Ware house management website
+# Todo App
 
-Car warehouse management website. From where customers can take experience like guidelines about cars and price brands.
-Live Client site Link: https://cute-car-inventory.web.app/
-or [Click to visit Cute Car- Ware house management website](https://cute-car-inventory.web.app/).
-Live Server site Link: https://secure-cliffs-70594.herokuapp.com/
-or [Click to visit Cute Car- Ware house Server site](https://secure-cliffs-70594.herokuapp.com/).
+Simple Todo app CRUD application [Live site link: ](https://todo-app-be858.web.app/).
 
-## To complete this whole project I used
-
-- React
-- React Router
-- Bootstrap
-- Firebase Authentication
-- React Bootsrap
-- Font Awsome
-- Axios
-- Express
-- Cors
-- JWT
-
-# Top feature of this website
-
-- Awsome Slider - I made a carousel of two img which looks good.
-- Cars section - From the cars section any client can easily simple looks to main cars.
-- Counter section - Any visitor can easily overview the previous whole inventory.
-- Contact section - Visitor can easily get in touch with the contact area.
-- car number counting
-- Finally the footer area.
-
-There are also other routes in this website
-
-- Blogs - in blogs area there are some question.
-
-* Management inventory - Here is the about details of the huge collection of cars.
-* inventory - customer will redirect to cheack out if he eidt something.
-* Login / Logout - this is the most awsome feature of this site. user can register themself to this site.
+Server Site live link: https://todo-app-for-special-grp.herokuapp.com/tasks
+Client site github link: https://github.com/JahidHasanPintu/TodoAppClient
